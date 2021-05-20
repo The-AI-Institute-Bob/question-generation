@@ -125,39 +125,6 @@ args_dict = {
 
 prepare_data(args_dict)
 ```
-
-
-    HBox(children=(FloatProgress(value=0.0, max=19029.0), HTML(value='')))
-
-
-    
-    
-
-
-    HBox(children=(FloatProgress(value=0.0, max=20.0), HTML(value='')))
-
-
-    
-    
-
-    05/20/2021 15:15:43 - INFO - drive.MyDrive.T5_Model.prepare_data -   saved train dataset at train_data_QG_T5.pt
-    
-
-
-    HBox(children=(FloatProgress(value=0.0, max=1204.0), HTML(value='')))
-
-
-    
-    
-
-
-    HBox(children=(FloatProgress(value=0.0, max=2.0), HTML(value='')))
-
-
-    05/20/2021 15:15:46 - INFO - drive.MyDrive.T5_Model.prepare_data -   saved validation dataset at valid_data_QG_T5.pt
-    05/20/2021 15:15:46 - INFO - drive.MyDrive.T5_Model.prepare_data -   saved tokenizer at QG_qg_tokenizer
-    
-
     
     
 
@@ -196,8 +163,6 @@ run_qg(args_dict)
     05/19/2021 13:54:24 - INFO - drive.MyDrive.T5_Model.run -   finished loading dataset
     
 
-
-    HBox(children=(FloatProgress(value=0.0, max=12660.0), HTML(value='')))
 
 
 # Testing the model
