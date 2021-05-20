@@ -199,7 +199,7 @@ def main(args_file=None):
 
 
     # Training loop
-    optimizer = AdamW(model.parameters(), lr=0.0001) #To change
+    optimizer = AdamW(model.parameters(), lr=trainig_args.learning_rate)
     num_training_steps = training_args.num_train_epochs * len(train_data_loader)
     lr_scheduler = get_scheduler(
         "linear",
