@@ -1,5 +1,0 @@
-sentencepiece >= 0.1.95
-transformers >=4.6.1
-datasets >=1.6.2
-torchvision
-tensorboard
