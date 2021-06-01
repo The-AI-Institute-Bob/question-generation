@@ -230,6 +230,7 @@ def main(args_file=None):
             if model_args.label_smoothing == 0:
                 outputs = model(**batch)
                 loss = outputs[0]
+            #If we want to use our custom smoothed loss    
             else:
                 labels = batch.pop("labels")
                 labels[labels == -100] = model.config.pad_token_id
@@ -248,6 +249,7 @@ def main(args_file=None):
         progress_bar.update(1)
         logger.info(f'Epoch {epoch}: loss = {loss}')
         
+        #The following loop allows us to evaluate the loss during training (at the end of each epoch)
         if model_args.evaluate_during_training:
             progress_bar_3 = tqdm(range(len(eval_data_loader)))
             model.eval()
@@ -270,7 +272,7 @@ def main(args_file=None):
                 test_loss /= len(eval_data_loader)        
                 writer.add_scalar("Loss/test", test_loss, epoch) #Saving the logs for n_iter
                 logger.info(f"Epoch {epoch}, test loss = {test_loss}")
-
+            model.train()
             
         if (epoch+1)%2 == 0:
             torch.save({
