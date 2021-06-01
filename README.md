@@ -1,30 +1,24 @@
 # Required packaged
 
-
-```python
-!pip install datasets
-```
-
-
-```python
-!pip install transformers
-```
-
-
-```python
-!pip install sentencepiece
-```
+The required packages can be found in requirements.txt
 
 # Input format
 
+The input dataset format should be as follow:
 
 ```python
-toy_dataset = {'President Obama was born in 1961': 'When was Obama born ?',
-                  'The french revolution began in 1789':'When did the French revolution begin ?',
-                  'Astatine is the rarest naturally occurring element on Earth':'What is the rarest material in the world ?'              
-               }
+toy_dataset = {'When did Beyonce start becoming popular?': {'context': 'Beyoncé Giselle Knowles-Carter...' ,
+  'answer': 'in the late 1990s'},
+ 'What areas did Beyonce compete in when she was growing up?': {'context': 'Beyoncé Giselle Knowles-Carter...',
+  'answer': 'singing and dancing'}
+  }
 ```
-
+or for context without answer:
+```python
+toy_dataset = {'When did Beyonce start becoming popular?': 'Beyoncé Giselle Knowles-Carter...' ,
+ 'What areas did Beyonce compete in when she was growing up?': 'Beyoncé Giselle Knowles-Carter...'
+  }
+```
 Questions can also be a list of questions
 
 
@@ -36,7 +30,7 @@ with open('toy_dataset2.json', 'w') as f:
 
 # Preparing Squad Data
 
-La partie ci-dessous ne concerne que le fine-tuning sur le dataset squad
+La partie ci-dessous ne concerne que le fine-tuning sur le dataset squad afin de le transformer en format adéquat.
 
 
 ```python
