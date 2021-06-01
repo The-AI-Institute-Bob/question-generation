@@ -9,7 +9,7 @@ The input dataset format should be as follow:
 ```python
 toy_dataset = {'When did Beyonce start becoming popular?': {'context': 'Beyoncé Giselle Knowles-Carter...' ,
   'answer': 'in the late 1990s'},
- 'What areas did Beyonce compete in when she was growing up?': {'context': 'Beyoncé Giselle Knowles-Carter...',
+ 'What areas did Beyonce compete in when she was growing up?': {'context': 'Beyoncé Giselle Knowles-Carter...' ,
   'answer': 'singing and dancing'}
   }
 ```
@@ -19,14 +19,8 @@ toy_dataset = {'When did Beyonce start becoming popular?': 'Beyoncé Giselle Kno
  'What areas did Beyonce compete in when she was growing up?': 'Beyoncé Giselle Knowles-Carter...'
   }
 ```
-Questions can also be a list of questions
+Questions can also be a list of questions for the same context (usually for generation without answers)
 
-
-```python
-import json
-with open('toy_dataset2.json', 'w') as f:
-    json.dump(toy_dataset,f)
-```
 
 # Preparing Squad Data
 
