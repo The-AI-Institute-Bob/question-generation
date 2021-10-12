@@ -31,7 +31,7 @@ Any datasets sharing this format work.
 - Create a sub data folder
 - Donwload squad datasets 2.0
 
-# Download the data 
+# Download the squad data 
 
 ```python
 !mkdir squad
@@ -60,8 +60,35 @@ Any datasets sharing this format work.
     dev-v2.0.json.1     100%[===================>]   4.17M  --.-KB/s    in 0.01s   
 
     2021-09-20 13:52:01 (283 MB/s) - ‘dev-v2.0.json.1’ saved [4370528/4370528]
-    
-    
+ 
+# Download the quac data
+```python
+!wget https://s3.amazonaws.com/my89public/quac/train_v0.2.json
+!wget https://s3.amazonaws.com/my89public/quac/val_v0.2.json
+```
+
+    --2021-09-27 13:30:24--  https://s3.amazonaws.com/my89public/quac/train_v0.2.json
+    Resolving s3.amazonaws.com (s3.amazonaws.com)... 52.217.67.94
+    Connecting to s3.amazonaws.com (s3.amazonaws.com)|52.217.67.94|:443... connected.
+    HTTP request sent, awaiting response... 200 OK
+    Length: 68114819 (65M) [application/json]
+    Saving to: ‘train_v0.2.json’
+
+    train_v0.2.json     100%[===================>]  64.96M  17.8MB/s    in 4.2s    
+
+    2021-09-27 13:30:29 (15.3 MB/s) - ‘train_v0.2.json’ saved [68114819/68114819]
+
+    --2021-09-27 13:30:29--  https://s3.amazonaws.com/my89public/quac/val_v0.2.json
+    Resolving s3.amazonaws.com (s3.amazonaws.com)... 52.217.98.246
+    Connecting to s3.amazonaws.com (s3.amazonaws.com)|52.217.98.246|:443... connected.
+    HTTP request sent, awaiting response... 200 OK
+    Length: 8929167 (8.5M) [application/json]
+    Saving to: ‘val_v0.2.json’
+
+    val_v0.2.json       100%[===================>]   8.51M  8.63MB/s    in 1.0s    
+
+    2021-09-27 13:30:31 (8.63 MB/s) - ‘val_v0.2.json’ saved [8929167/8929167]
+
 
 # Format the data
 ```python
