@@ -196,7 +196,7 @@ model(context, sent)
 # Benchmark the model
  - BLEU (BLEU-4 by default)
  - ROUGE
- - 
+ 
 ## Create datasets with generate questions:
 ```python
 results = []
