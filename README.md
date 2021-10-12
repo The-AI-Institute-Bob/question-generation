@@ -90,16 +90,23 @@ Any datasets sharing this format work.
     2021-09-27 13:30:31 (8.63 MB/s) - ‘val_v0.2.json’ saved [8929167/8929167]
 
 
-# Format the data
+# Merge & format the data
 ```python
 from data_formatter import format_data
 from prepare_data import prepare_data
 from run import run_qg
 
-format_data('train-v2.0.json','dev-v2.0.json')
+# example paths
+training_data_quac = '/shared/shawn/q_g/question-generations/T5_Model/quac/train_v0.2.json'
+test_data_quac = '/shared/shawn/q_g/question-generations/T5_Model/quac/val_v0.2.json'
+
+training_data_squad = '/shared/shawn/q_g/question-generations/T5_Model/squad/train-v2.0.json'
+test_data_squad = '/shared/shawn/q_g/question-generations/T5_Model/squad/dev-v2.0.json'
+
+merged_training_data, merged_test_data = format_data(training_data_squad, test_data_squad,training_data_quac,test_data_quac)
 
 ```
-    09/21/2021 16:43:14 - INFO - data_fomatter -   Fomatted data has been saved into /shared/shawn/q_g/question-generations/T5_Model
+    10/12/2021 18:06:19 - INFO - __main__ -   Fomatted data has been saved into /shared/shawn/q_g/question-generations/T5_Model
 
 
 # Prepare the data
@@ -108,8 +115,8 @@ format_data('train-v2.0.json','dev-v2.0.json')
 ```python
 args_dict = {
     'model_type': 'QAG',
-    'train_file': 'squad_train.json',
-    'valid_file': 'squad_test.json',
+    'train_file': 'merged_train.json',
+    'valid_file': 'merged_test.json',
 
     }
 
@@ -128,14 +135,14 @@ args_dict = {
     "model_name_or_path": "t5-small",
     "model_type": "t5",
     "tokenizer_name_or_path": "QAG_qg_tokenizer",
-    "output_dir": "t5-base-qag-hl-batch20",
-    "train_file_path": "train_data_QAG_T5.pt",
-    "valid_file_path": "valid_data_QAG_T5.pt",
-    "per_device_train_batch_size": 20, # 32
-    "per_device_eval_batch_size": 20, # 32
+    "output_dir": "t5-base-qag-hl-merged",
+    "train_file_path": "merged_train_data_QAG_T5.pt",
+    "valid_file_path": "merged_valid_data_QAG_T5.pt",
+    "per_device_train_batch_size": 32, 
+    "per_device_eval_batch_size": 32, 
     "gradient_accumulation_steps": 8,
     "learning_rate": 1e-4,
-    "num_train_epochs": 20,
+    "num_train_epochs": 25,
     "seed": 42,
     "do_train": True,
     "do_eval": True,
@@ -143,90 +150,8 @@ args_dict = {
     "logging_steps": 100
 }
 
-# start training
 run_qg(args_dict)
 ```
-
-    09/01/2021 13:30:16 - WARNING - run -   Process rank: -1, device: cuda:0, n_gpu: 1, distributed training: False, 16-bits training: False
-    09/01/2021 13:30:16 - INFO - run -   Training/evaluation parameters TrainingArguments(
-    _n_gpu=1,
-    adafactor=False,
-    adam_beta1=0.9,
-    adam_beta2=0.999,
-    adam_epsilon=1e-08,
-    dataloader_drop_last=False,
-    dataloader_num_workers=0,
-    dataloader_pin_memory=True,
-    ddp_find_unused_parameters=None,
-    debug=[],
-    deepspeed=None,
-    disable_tqdm=False,
-    do_eval=True,
-    do_predict=False,
-    do_train=True,
-    eval_accumulation_steps=None,
-    eval_steps=None,
-    evaluation_strategy=IntervalStrategy.NO,
-    fp16=False,
-    fp16_backend=auto,
-    fp16_full_eval=False,
-    fp16_opt_level=O1,
-    gradient_accumulation_steps=8,
-    greater_is_better=None,
-    group_by_length=False,
-    ignore_data_skip=False,
-    label_names=None,
-    label_smoothing_factor=0.0,
-    learning_rate=0.0001,
-    length_column_name=length,
-    load_best_model_at_end=False,
-    local_rank=-1,
-    log_level=-1,
-    log_level_replica=-1,
-    log_on_each_node=True,
-    logging_dir=t5-base-qag-hl-batch20/runs/Sep01_13-30-16_ip-172-31-10-76,
-    logging_first_step=False,
-    logging_steps=100,
-    logging_strategy=IntervalStrategy.STEPS,
-    lr_scheduler_type=SchedulerType.LINEAR,
-    max_grad_norm=1.0,
-    max_steps=-1,
-    metric_for_best_model=None,
-    mp_parameters=,
-    no_cuda=False,
-    num_train_epochs=20,
-    output_dir=t5-base-qag-hl-batch20,
-    overwrite_output_dir=False,
-    past_index=-1,
-    per_device_eval_batch_size=20,
-    per_device_train_batch_size=20,
-    prediction_loss_only=True,
-    push_to_hub=False,
-    push_to_hub_model_id=t5-base-qag-hl-batch20,
-    push_to_hub_organization=None,
-    push_to_hub_token=None,
-    remove_unused_columns=True,
-    report_to=['tensorboard'],
-    resume_from_checkpoint=None,
-    run_name=t5-base-qag-hl-batch20,
-    save_on_each_node=False,
-    save_steps=500,
-    save_strategy=IntervalStrategy.STEPS,
-    save_total_limit=None,
-    seed=42,
-    sharded_ddp=[],
-    skip_memory_metrics=True,
-    tpu_metrics_debug=False,
-    tpu_num_cores=None,
-    use_legacy_prediction_loop=False,
-    warmup_ratio=0.0,
-    warmup_steps=0,
-    weight_decay=0.0,
-    )
-    09/01/2021 13:30:19 - INFO - run -   loading dataset
-    09/01/2021 13:30:21 - INFO - run -   finished loading dataset
-    
-
 
 
 # Testing the model
@@ -256,7 +181,7 @@ for sent in sents:
 ```python
 from pipeline import pipeline
 
-model = pipeline('t5-base-qag-hl-batch20','QAG')
+model = pipeline('your_model_directory','QAG')
 
 context = '''
 The Normans (Norman: Nourmands; French: Normands; Latin: Normanni) were the people who in the 10th and 11th centuries gave their name to Normandy, a region in France. They were descended from Norse ("Norman" comes from "Norseman") raiders and pirates from Denmark, Iceland and Norway who, under their leader Rollo, agreed to swear fealty to King Charles III of West Francia. Through generations of assimilation and mixing with the native Frankish and Roman-Gaulish populations, their descendants would gradually merge with the Carolingian-based cultures of West Francia. The distinct cultural and ethnic identity of the Normans emerged initially in the first half of the 10th century, and it continued to evolve over the succeeding centuries.
@@ -267,3 +192,61 @@ sent = 'The Normans (Norman: Nourmands; French: Normands; Latin: Normanni) were 
 model(context, sent)
 ```
     'What were the Normans in the 10th and 11th centuries?'
+    
+# Benchmark the model
+ - BLEU (BLEU-4 by default)
+ - ROUGE
+ - 
+## Create datasets with generate questions:
+```python
+results = []
+for q, a in zip(questions, contexts):
+    results.append({'original_question':q,
+                    'generated_question': model_(a['context'], a['answer']),
+                    'contexts': a['context']})
+    
+    
+with open('t5_results_from_merged_squad.json','w') as f:
+    json.dump(results,f)
+    
+
+```
+
+## Load the data
+```python
+with open('t5_results_from_merged_squad.json','r') as f:
+    data = json.load(f)
+```
+
+## BLEU
+```python
+from datasets import load_metric
+# metric = load_metric("rouge")
+metric = load_metric("bleu")
+
+model_predictions = [q[1].split() for q in questions]
+references = [[q[0].split()]for q in questions]
+
+merged_results = metric.compute(predictions=model_predictions, references=references)
+
+merged_results['bleu']
+```
+    0.18645062269843635
+    
+## ROGUE
+```python
+from datasets import load_metric
+metric = load_metric("rouge")
+
+model_predictions = [q[1] for q in questions]
+references = [q[0] for q in questions]
+
+merged_results = metric.compute(predictions=model_predictions, references=references)
+
+merged_results['rougeL'].mid.fmeasure
+```
+    0.4599304131354284
+
+
+
+
