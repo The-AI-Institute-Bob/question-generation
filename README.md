@@ -199,6 +199,12 @@ model(context, sent)
  
 ## Create datasets with generate questions:
 ```python
+with open('squad_test.json','r') as f:
+    data = json.load(f)
+    
+questions = list(data.keys())
+contexts = list(data.values())
+
 results = []
 for q, a in zip(questions, contexts):
     results.append({'original_question':q,
