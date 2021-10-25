@@ -158,7 +158,7 @@ run_qg(args_dict)
 ```python
 from pipeline import pipeline
 
-nlp = pipeline('valhalla/t5-small-e2e-qg', model_type = "QG") #model_type = "QAG" if you want to add an with the context, QG is for the old model
+nlp = pipeline('valhalla/t5-small-e2e-qg', model_type = "QG") #model_type = "QAG" if you want to add an answer with the context, QG is for the old model
 ```
 
 
