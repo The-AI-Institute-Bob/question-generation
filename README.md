@@ -158,12 +158,12 @@ run_qg(args_dict)
 ```python
 from pipeline import pipeline
 
-nlp = pipeline('valhalla/t5-small-e2e-qg')
+nlp = pipeline('valhalla/t5-small-e2e-qg', model_type = "QG") #model_type = "QAG" if you want to add an with the context, QG is for the old model
 ```
 
 
 ```python
-nlp("Python is a programming language. Created by Guido van Rossum and first released in 1991.")
+nlp(context = "Python is a programming language. Created by Guido van Rossum and first released in 1991.", answer = None)
 ```
 
 
