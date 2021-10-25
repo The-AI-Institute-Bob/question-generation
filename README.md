@@ -24,8 +24,7 @@ Questions can also be a list of questions for the same context (usually for gene
 
 # Preparing Squad Data
 
-La partie ci-dessous ne concerne que le fine-tuning sur le dataset squad afin de le transformer en format adéquat.
-
+The part below only concerns the fine-tuning on squad dataset
 
 ```python
 !mkdir squad
